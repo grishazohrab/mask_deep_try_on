@@ -56,7 +56,7 @@ class TrainOptions(BaseOptions):
         parser.add_argument(
             "--update_html_freq",
             type=int,
-            default=1,
+            default=100,
             help="frequency of saving training results to html",
         )
         parser.add_argument(

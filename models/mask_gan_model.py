@@ -17,7 +17,7 @@ class MaskGanModel(BaseGAN):
 
         parser.add_argument("--face_input",
                             help="how many channels the input should have",
-                            default="many",
+                            default="few",
                             choices=("many", "few"))
 
         parser.add_argument("--face_w",
@@ -56,7 +56,7 @@ class MaskGanModel(BaseGAN):
 
         BaseGAN.__init__(self, opt)
 
-        self.visual_names = ["with_masks", "images", "gen_images", "fakes"]
+        self.visual_names = ["with_masks", "images", "fakes", "landmark_mask"]
 
         if self.is_train:
             # only show targets during training
@@ -79,15 +79,16 @@ class MaskGanModel(BaseGAN):
         self.fakes = un_normalize(self.fakes, self.mean, self.std)
         self.with_masks = un_normalize(self.with_masks, self.mean, self.std)
         self.images = un_normalize(self.images, self.mean, self.std)
-        self.gen_images = un_normalize(self.gen_images, self.mean, self.std)
+        # self.gen_images = un_normalize(self.gen_images, self.mean, self.std)
 
     def set_input(self, input):
         self.with_masks = input["w_img"].to(self.device)
         self.images = input["img"].to(self.device)
-        self.gen_images = input["g_img"].to(self.device)
+        self.landmark_mask = input["landmark_mask"].to(self.device)
+        # self.gen_images = input["g_img"].to(self.device)
 
     def forward(self):
-        self.fakes = self.net_generator((self.images, self.gen_images))
+        self.fakes = self.net_generator(self.images, self.landmark_mask)
 
     def backward_D(self):
 

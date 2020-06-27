@@ -49,7 +49,8 @@ def get_transforms(transform_names: list, mean: float, std: float, h: int, w: in
         print(t_name)
         transforms.append(data_transforms[t_name](**generate_rand_numbers(t_name)))
 
-    rand_apply = RandomApply(transforms, p=0.5)
+    # rand_apply = RandomApply(transforms, p=0.5)
+    rand_apply = None
     if normalize_flag:
         normalize = Normalize(mean, std)
         return rand_apply, Resize((h, w)), normalize

@@ -96,7 +96,7 @@ class BaseOptions:
             "--max_dataset_size", type=int, default=float("inf"), help="cap on data"
         )
         parser.add_argument(
-            "--batch_size", type=int, default=8, help="batch size to load data"
+            "--batch_size", type=int, default=16, help="batch size to load data"
         )
         parser.add_argument(
             "--shuffle_data",

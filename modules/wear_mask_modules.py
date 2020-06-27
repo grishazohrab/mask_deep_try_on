@@ -16,8 +16,8 @@ class MaskTryOnModule(nn.Module):
 
         self.face_output = define_G(input_nc=channels, output_nc=3, ngf=64, netG="unet_128")
 
-    def forward(self, face):
-        face = torch.cat([face[0], face[1]], dim=1)
+    def forward(self, face, landmark_mask):
+        # face = torch.cat([face[0], face[1]], dim=1)
 
         face_o = self.face_output(face)
-        return face_o
+        return face_o + face

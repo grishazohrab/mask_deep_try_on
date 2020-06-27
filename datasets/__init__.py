@@ -70,7 +70,7 @@ class CappedDataLoader:
             self.dataset,
             batch_size=opt.batch_size,
             shuffle=opt.shuffle_data,
-            num_workers=opt.num_workers,
+            num_workers=1,
         )
 
     def __len__(self):
