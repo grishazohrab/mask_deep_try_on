@@ -1,6 +1,6 @@
 imutils==0.5.3
 sympy==1.6
-numpy==1.18.5
+numpy==1.22.0
 dlib==19.20.0
 opencv-python==4.2.0.34
 tqdm==4.46.1
